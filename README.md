@@ -50,7 +50,7 @@ array:6 [▼
   "borth" => "19970424"
 ]
 ```
-**if info is 0, result is string:**
+**If info is 0, result is string:**
 ```
 "210303199909245583"
 ```
@@ -91,7 +91,7 @@ array:5 [▼
   4 => array:6 [▶]
 ]
 ```
-**if info is 0, result is array:**
+**If info is 0, result is array:**
 ```
 array:5 [▼
   0 => "211404197304158122"
@@ -104,12 +104,12 @@ array:5 [▼
 
 **On(array $attributes) usage:**
 $attributes is arguments,including:
-- province: china province
-- city1: the first level city, like `沈阳市`
-- city2: the second level city, like `某某区`
--datetime: birthdate, format is 2018-08-08
-- sex: sex, 0 is male and 1 is female
-- info: is show all info
+- province: Chinese province
+- city1: The first level city, like `沈阳市`
+- city2: The second level city, like `某某区`
+- datetime: Birthdate, format is 2018-08-08
+- sex: Sex, 0 is male and 1 is female
+- info: Is show all info
 
 **limit(int $count) usage:**
-Limit the number of rows you can get
+Limit the number of rows you can get.
