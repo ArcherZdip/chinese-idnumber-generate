@@ -29,15 +29,15 @@ In your config/app.php add 'GenerateIDNo' => \ArcherZdip\GenerateIDNumber\Genera
 
 **Getone() usage:**
 ```php
-    $idNo = app('generate_ch_id')->on([
-        'province' => '辽宁省',
-        'city1'    => '', // random
-        'city2'    => '', // random
-        'datetime' => '', // random
-        'sex'      => 1,  // 0-male  1-female
-        'info'     => 1,  // 1 show all info
-    ])->getone();
-    dd($idNo);    
+$idNo = app('generate_ch_id')->on([
+    'province' => '辽宁省',
+    'city1'    => '', // random
+    'city2'    => '', // random
+    'datetime' => '', // random
+    'sex'      => 1,  // 0-male  1-female
+    'info'     => 1,  // 1 show all info
+])->getone();
+dd($idNo);    
 ```
 **Result is array:**
 ```
@@ -57,15 +57,15 @@ array:6 [▼
 
 **get() usage"**
 ```php
-    $idNos = app('generate_ch_id')->on([
-        'province' => '辽宁省',
-        'city1'    => '',
-        'city2'    => '',
-        'datetime' => '',
-        'sex'      => 1,  // 0-male  1-female
-        'info'     => 1,  // 1 show all info
-    ])->limit(5)->get();
-    dd($idNos);
+$idNos = app('generate_ch_id')->on([
+    'province' => '辽宁省',
+    'city1'    => '',
+    'city2'    => '',
+    'datetime' => '',
+    'sex'      => 1,  // 0-male  1-female
+    'info'     => 1,  // 1 show all info
+])->limit(5)->get();
+dd($idNos);
 ```
 **Result is array:**
 ```
