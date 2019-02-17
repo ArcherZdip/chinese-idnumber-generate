@@ -1,0 +1,11 @@
+{
+    "name": "zhanglingyu/chinese-idnumber-generate",
+    "description": "Chinses ID number generate package.",
+    "authors": [
+        {
+            "name": "archerzdip",
+            "email": "646121218@qq.com"
+        }
+    ],
+    "require": {}
+}
