@@ -14,9 +14,6 @@ class GenerateChineseIDNumberService
     /** @var $province */
     public $province = null;
 
-    /** @var null $curProvince */
-    public $curProvince = null;
-
     /** @var $city1 first level city */
     public $city1 = null;
 
@@ -28,9 +25,6 @@ class GenerateChineseIDNumberService
 
     /** @var $datetime */
     public $datetime = null;
-
-    /** @var $birth */
-    private $birth;
 
     /** @var $sex */
     public $sex = null;
@@ -149,7 +143,7 @@ class GenerateChineseIDNumberService
                 'city1'    => $this->getCity1(),
                 'city2'    => $this->getCity2(),
                 'sex'      => $this->getSex(),
-                'borth'    => $this->birth
+                'borth'    => $this->getBirthdate()
             ];
         } else {
             $ids = $idNumber;
@@ -181,7 +175,7 @@ class GenerateChineseIDNumberService
             }
             $datetime = $year . $month . $day;
         }
-        $this->birth = $datetime;
+        $this->cityInfo['birthdate'] = $datetime;
         return $datetime;
     }
 
@@ -204,7 +198,7 @@ class GenerateChineseIDNumberService
             }
             $province = $this->province;
         }
-        $this->curProvince = $province;
+        $this->cityInfo['province'] = $province;
         return $province;
     }
 
@@ -442,7 +436,7 @@ class GenerateChineseIDNumberService
      */
     protected function getProvince()
     {
-        return $this->curProvince;
+        return $this->cityInfo['province'];
     }
 
     /**
@@ -470,5 +464,13 @@ class GenerateChineseIDNumberService
             return '男';
         }
         return '女';
+    }
+
+    /**
+     * @return mixed
+     */
+    protected function getBirthdate()
+    {
+        return $this->cityInfo['birthdate'];
     }
 }
