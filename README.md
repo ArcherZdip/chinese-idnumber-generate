@@ -23,6 +23,11 @@ In your config/app.php add ArcherZdip\GenerateIDNumber\GenerateChineseIDNumberSe
 * limit(int $count)
 * toString()
 * toArray()
+* province(string $province)
+* city(string $city)
+* region(string $region)
+* sex(int $sex)
+* datetime(string $datetime)
 
 ## Usage
 
@@ -114,3 +119,18 @@ array:6 [
   "birth" => "20180212"
 ]
 ```
+
+### **province(string $province) usage:**
+Set province.
+
+### **city(string $city) usage:**
+Set city.
+
+### **region(string $region) usage:**
+Set region.
+
+### **sex(int $sex) usage:**
+Set sex.
+
+### **datetime(string $datetime) usage:**
+Set datetime, format xxxx-xx-xx.
