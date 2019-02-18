@@ -17,7 +17,7 @@ class GenerateChineseIDNumberFacade
      */
     protected static function getFacadeAccessor()
     {
-        return 'generate_ch_id';
+        return 'chinese_id_faker';
     }
 
 }

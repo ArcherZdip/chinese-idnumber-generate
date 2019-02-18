@@ -8,17 +8,16 @@
 
 namespace ArcherZdip\GenerateIDNumber;
 
-
 class GenerateChineseIDNumberService
 {
     /** @var $province */
     public $province = null;
 
-    /** @var $city1 first level city */
-    public $city1 = null;
+    /** @var $city */
+    public $city = null;
 
-    /** @var $city2 second level city */
-    public $city2 = null;
+    /** @var $region */
+    public $region = null;
 
     /** @var $cityid */
     public $cityid = null;
@@ -41,11 +40,8 @@ class GenerateChineseIDNumberService
     /** @var array $cityInfo */
     public $cityInfo = [];
 
-    /** @var bool $info is show all info */
-    public $info = false;
-
     /** @var array $fillable set param */
-    protected $fillable = ['province', 'city1', 'city2', 'datetime', 'sex', 'info'];
+    protected $fillable = ['province', 'city', 'region', 'datetime', 'sex'];
 
     /** @var int 男 */
     const MALE = 0;
@@ -78,15 +74,15 @@ class GenerateChineseIDNumberService
             $ids[] = $this->generateChineseID();
         }
 
-        return $ids;
+        return new Foo($ids);
     }
 
     /**
      * Generate one chinese id number
-     * @return string
+     * @return array
      * @throws \Exception
      */
-    public function getone()
+    public function getOne()
     {
         return $this->generateChineseID();
     }
@@ -140,20 +136,16 @@ class GenerateChineseIDNumberService
         $base = $this->cityid . $this->calcDatatime() . $suffix_a . $suffix_b . $this->sex;
         $idNumber = $base . $this->calcSuffixD($base);
 
-        if ($this->info) {
-            $ids = [
-                'id'       => $idNumber,
-                'province' => $this->getProvince(),
-                'city1'    => $this->getCity1(),
-                'city2'    => $this->getCity2(),
-                'sex'      => $this->getSex(),
-                'birth'    => $this->getBirthdate()
-            ];
-        } else {
-            $ids = $idNumber;
-        }
+        $chineseIDNumber = new ChineseIDNumber();
+        $chineseIDNumber->id = $idNumber;
+        $chineseIDNumber->province = $this->getProvince();
+        $chineseIDNumber->province = $this->getProvince();
+        $chineseIDNumber->city = $this->getCity();
+        $chineseIDNumber->region = $this->getRegion();
+        $chineseIDNumber->sex = $this->getSex();
+        $chineseIDNumber->birth = $this->getBirthdate();
 
-        return $ids;
+        return $chineseIDNumber;
     }
 
     /**
@@ -211,7 +203,7 @@ class GenerateChineseIDNumberService
      * @return int
      * @throws \Exception
      */
-    protected function calcCityFirstLevel()
+    protected function calcCity()
     {
         // Get Rrovince info
         $province = $this->calcProvince();
@@ -225,9 +217,9 @@ class GenerateChineseIDNumberService
         $cLen = count($cityFirstLevel);
 
         // Get first city number for cityid
-        if (is_null($this->city1)) {
-            $city1Id = $cLen == 1 ? 0 : random_int(1, $cLen - 1);
-            $this->cityInfo['city1'] = array_keys($cityFirstLevel[$city1Id])[0];
+        if (is_null($this->city)) {
+            $cityId = $cLen == 1 ? 0 : random_int(1, $cLen - 1);
+            $this->cityInfo['city'] = array_keys($cityFirstLevel[$cityId])[0];
         } else {
             // del first element
             array_shift($cityFirstLevel);
@@ -236,17 +228,17 @@ class GenerateChineseIDNumberService
                 return array_keys($list)[0];
             }, $cityFirstLevel);
 
-            if (!in_array($this->city1, $provinceCitys)) {
+            if (!in_array($this->city, $provinceCitys)) {
                 die("The first level city is not exists.");
             }
 
             // key value flip
             $provinceCitys = array_flip($provinceCitys);
-            $city1Id = $provinceCitys[$this->city1] + 1;
-            $this->cityInfo['city1'] = $this->city1;
+            $cityId = $provinceCitys[$this->city] + 1;
+            $this->cityInfo['city'] = $this->city;
         }
 
-        return $city1Id;
+        return $cityId;
     }
 
     /**
@@ -256,39 +248,39 @@ class GenerateChineseIDNumberService
      */
     protected function calcCityId()
     {
-        // Get first city number
-        $city1Id = $this->calcCityFirstLevel();
-        // Get first level citys
-        $cityFirstLevel = $this->citys[$this->getProvince()];
+        // Get city number
+        $cityId = $this->calcCity();
+        // Get citys
+        $citys = $this->citys[$this->getProvince()];
 
-        // Get second level citys
-        $secondLevelCitys = $cityFirstLevel[$city1Id];
+        // Get region
+        $regions = $citys[$cityId];
 
-        // Get cityid from second city info : city2 is null
-        if (is_null($this->city2)) {
-            $cityids = array_values($secondLevelCitys)[0];
+        // Get cityid from region : region is null
+        if (is_null($this->region)) {
+            $cityids = array_values($regions)[0];
             if (is_array($cityids)) {
                 // random a number
                 $randomNumber = random_int(0, count($cityids) - 1);
                 $this->cityid = $cityids[$randomNumber]['cityid'];
-                $this->cityInfo['city2'] = $cityids[$randomNumber]['cityname'];
+                $this->cityInfo['region'] = $cityids[$randomNumber]['cityname'];
             } else {
                 $this->cityid = $cityids;
-                $this->cityInfo['city2'] = array_values($secondLevelCitys)[1];
+                $this->cityInfo['region'] = array_values($regions)[1];
             }
         } else {
-            // Get second citys
-            $baseSecondCitys = array_values($secondLevelCitys)[0];
+            // Get region
+            $baseRegions = array_values($regions)[0];
             $secondCitys = array_map(function ($list) {
                 return $list['cityname'];
-            }, $baseSecondCitys);
-            if (!in_array($this->city2, $secondCitys)) {
+            }, $baseRegions);
+            if (!in_array($this->region, $secondCitys)) {
                 die("The second level city is not exists.");
             }
             // key value flip
             $secondCitys = array_flip($secondCitys);
-            $this->cityid = $baseSecondCitys[$secondCitys[$this->city2]]['cityid'];
-            $this->cityInfo['city2'] = $this->city2;
+            $this->cityid = $baseRegions[$secondCitys[$this->region]]['cityid'];
+            $this->cityInfo['region'] = $this->region;
         }
         return $this;
     }
@@ -369,7 +361,7 @@ class GenerateChineseIDNumberService
                 return '0';
                 break;
             case 2:
-                return 'x';
+                return 'X';
                 break;
             case 3:
                 return '9';
@@ -446,17 +438,17 @@ class GenerateChineseIDNumberService
     /**
      * @return mixed
      */
-    protected function getCity1()
+    protected function getCity()
     {
-        return $this->cityInfo['city1'];
+        return $this->cityInfo['city'];
     }
 
     /**
      * @return mixed
      */
-    protected function getCity2()
+    protected function getRegion()
     {
-        return $this->cityInfo['city2'];
+        return $this->cityInfo['region'];
     }
 
     /**

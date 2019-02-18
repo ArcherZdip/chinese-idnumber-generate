@@ -31,7 +31,7 @@ class GenerateChineseIDNumberServiceProvider extends ServiceProvider
     public function register()
     {
         // 单例绑定服务
-        $this->app->singleton('generate_ch_id', function ($app) {
+        $this->app->singleton('chinese_id_faker', function ($app) {
             return new GenerateChineseIDNumberService();
         });
     }
@@ -43,6 +43,6 @@ class GenerateChineseIDNumberServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return ['generate_ch_id'];
+        return ['chinese_id_faker'];
     }
 }
