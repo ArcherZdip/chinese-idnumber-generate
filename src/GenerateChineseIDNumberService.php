@@ -139,7 +139,6 @@ class GenerateChineseIDNumberService
         $chineseIDNumber = new ChineseIDNumber();
         $chineseIDNumber->id = $idNumber;
         $chineseIDNumber->province = $this->getProvince();
-        $chineseIDNumber->province = $this->getProvince();
         $chineseIDNumber->city = $this->getCity();
         $chineseIDNumber->region = $this->getRegion();
         $chineseIDNumber->sex = $this->getSex();
