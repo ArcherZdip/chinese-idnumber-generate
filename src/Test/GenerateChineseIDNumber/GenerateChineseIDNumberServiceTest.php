@@ -36,13 +36,7 @@ class GenerateChineseIDNumberServiceTest extends TestCase
     {
         $g = new GenerateChineseIDNumberService();
 
-        $res = $g->on([
-            'info' => 1,
-            'province' => '辽宁省',
-            'city1' => '朝阳市',
-            'datetime' => '2018-02-12',
-            'info' => 1
-        ])->getOne()->toArray();
+        $res = $g->province('辽宁省')->getOne()->toArray();
 
         dd($res);
     }

@@ -155,7 +155,7 @@ class GenerateChineseIDNumberService
     protected function calcDatatime()
     {
         //random Datatime
-        if (is_null($this->datetime)) {
+        if (empty($this->datetime)) {
             $startDate = mktime(0, 0, 0, 1, 1, 1950);
             $year = date('Y');
             $month = date('m');
@@ -184,7 +184,7 @@ class GenerateChineseIDNumberService
         // Get province
         $this->getProvinces();
         // random province
-        if (is_null($this->province)) {
+        if (empty($this->province)) {
             $province = $this->provinces[random_int(0, self::PROVINCENUM - 1)];
         } // set province by myself
         else {
@@ -216,7 +216,7 @@ class GenerateChineseIDNumberService
         $cLen = count($cityFirstLevel);
 
         // Get first city number for cityid
-        if (is_null($this->city)) {
+        if (empty($this->city)) {
             $cityId = $cLen == 1 ? 0 : random_int(1, $cLen - 1);
             $this->cityInfo['city'] = array_keys($cityFirstLevel[$cityId])[0];
         } else {
@@ -256,7 +256,7 @@ class GenerateChineseIDNumberService
         $regions = $citys[$cityId];
 
         // Get cityid from region : region is null
-        if (is_null($this->region)) {
+        if (empty($this->region)) {
             $cityids = array_values($regions)[0];
             if (is_array($cityids)) {
                 // random a number
@@ -292,7 +292,7 @@ class GenerateChineseIDNumberService
     protected function calcSex()
     {
         // sex is null , random 1 - 8
-        if (is_null($this->sex)) {
+        if (empty($this->sex)) {
             $this->sex = random_int(1, 8);
         } // sex is male
         elseif ($this->sex == self::MALE) {
@@ -467,5 +467,55 @@ class GenerateChineseIDNumberService
     protected function getBirthdate()
     {
         return $this->cityInfo['birthdate'];
+    }
+
+    /**
+     * @param null $province
+     * @return $this
+     */
+    public function province($province = null)
+    {
+        $this->province = $province;
+        return $this;
+    }
+
+    /**
+     * @param null $city
+     * @return $this
+     */
+    public function city($city = null)
+    {
+        $this->city = $city;
+        return $this;
+    }
+
+    /**
+     * @param null $region
+     * @return $this
+     */
+    public function region($region = null)
+    {
+        $this->region = $region;
+        return $this;
+    }
+
+    /**
+     * @param null $sex
+     * @return $this
+     */
+    public function sex($sex = null)
+    {
+        $this->sex = $sex;
+        return $this;
+    }
+
+    /**
+     * @param null $birthdate
+     * @return $this
+     */
+    public function birthdate($birthdate = null)
+    {
+        $this->datetime = $birthdate;
+        return $this;
     }
 }
