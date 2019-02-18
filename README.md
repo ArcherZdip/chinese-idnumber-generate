@@ -2,6 +2,9 @@
 
 ## Installation
 ### composer
+```
+composer require archerzdip/chinese-idnumber-generate
+```
 
 ### Laravel
 In your config/app.php add ArcherZdip\GenerateIDNumber\GenerateChineseIDNumberServiceProvider::class, to the end of the providers array:
@@ -27,7 +30,7 @@ In your config/app.php add 'GenerateIDNo' => \ArcherZdip\GenerateIDNumber\Genera
 
 ## Usage
 
-**Getone() usage:**
+### **getone() usage:**
 ```php
 $idNo = app('generate_ch_id')->on([
     'province' => '辽宁省',
@@ -47,7 +50,7 @@ array:6 [▼
   "city1" => "鞍山市"
   "city2" => "海城市"
   "sex" => "女"
-  "borth" => "19970424"
+  "birth" => "19970424"
 ]
 ```
 **If info is 0, result is string:**
@@ -55,7 +58,7 @@ array:6 [▼
 "210303199909245583"
 ```
 
-**get() usage"**
+### **get() usage"**
 ```php
 $idNos = app('generate_ch_id')->on([
     'province' => '辽宁省',
@@ -76,7 +79,7 @@ array:5 [▼
     "city1" => "营口市"
     "city2" => "西市区"
     "sex" => "女"
-    "borth" => "19690130"
+    "birth" => "19690130"
   ]
   1 => array:6 [▼
     "id" => "21100220061113944x"
@@ -84,7 +87,7 @@ array:5 [▼
     "city1" => "辽阳市"
     "city2" => "白塔区"
     "sex" => "女"
-    "borth" => "20061113"
+    "birth" => "20061113"
   ]
   2 => array:6 [▶]
   3 => array:6 [▶]
@@ -102,7 +105,7 @@ array:5 [▼
 ]
 ```
 
-**On(array $attributes) usage:**
+### **On(array $attributes) usage:**
 $attributes is arguments,including:
 - province: Chinese province
 - city1: The first level city, like `沈阳市`
@@ -111,5 +114,5 @@ $attributes is arguments,including:
 - sex: Sex, 0 is male and 1 is female
 - info: Is show all info
 
-**limit(int $count) usage:**
+### **limit(int $count) usage:**
 Limit the number of rows you can get.

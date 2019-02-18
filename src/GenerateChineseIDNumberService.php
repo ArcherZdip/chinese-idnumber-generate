@@ -41,7 +41,7 @@ class GenerateChineseIDNumberService
     /** @var array $cityInfo */
     public $cityInfo = [];
 
-    /** @var bool $info is show dateinfo */
+    /** @var bool $info is show all info */
     public $info = false;
 
     /** @var array $fillable set param */
@@ -55,6 +55,9 @@ class GenerateChineseIDNumberService
 
     /** @var int province num in china */
     const PROVINCENUM = 34;
+
+    /** @var int max limit */
+    const MAXCOUNT = 100;
 
     /**
      * GenerateChineseIDNumberService constructor.
@@ -114,6 +117,7 @@ class GenerateChineseIDNumberService
     public function limit($limit)
     {
         $limit = (int)$limit ? $limit : 1;
+        $limit = ($limit >= self::MAXCOUNT) ? self::MAXCOUNT : $limit;
         $this->limit = $limit;
 
         return $this;
@@ -143,7 +147,7 @@ class GenerateChineseIDNumberService
                 'city1'    => $this->getCity1(),
                 'city2'    => $this->getCity2(),
                 'sex'      => $this->getSex(),
-                'borth'    => $this->getBirthdate()
+                'birth'    => $this->getBirthdate()
             ];
         } else {
             $ids = $idNumber;
@@ -265,7 +269,7 @@ class GenerateChineseIDNumberService
             $cityids = array_values($secondLevelCitys)[0];
             if (is_array($cityids)) {
                 // random a number
-                $randomNumber = random_int(0, count($cityids)-1);
+                $randomNumber = random_int(0, count($cityids) - 1);
                 $this->cityid = $cityids[$randomNumber]['cityid'];
                 $this->cityInfo['city2'] = $cityids[$randomNumber]['cityname'];
             } else {
@@ -460,7 +464,7 @@ class GenerateChineseIDNumberService
      */
     protected function getSex()
     {
-        if ($this->sex%2 != 0) {
+        if ($this->sex % 2 != 0) {
             return '男';
         }
         return '女';
