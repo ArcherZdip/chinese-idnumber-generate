@@ -37,7 +37,7 @@ $idNo = app('chinese_id_faker')->on([
 ])->getOne();
 dd($idNo);    
 ```
-**Result is array:**
+**Result is object:**
 ```
 ArcherZdip\GenerateIDNumber\ChineseIDNumber {#266
   +id: "210422201802123855"
@@ -60,7 +60,7 @@ $idNos = app('chinese_id_faker')->on([
 ])->limit(1)->get();
 dd($idNos);
 ```
-**Result is Object:**
+**Result is object:**
 ```
 ArcherZdip\GenerateIDNumber\Foo {#267
   +items: array:1 [
