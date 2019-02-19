@@ -7,5 +7,12 @@
             "email": "646121218@qq.com"
         }
     ],
-    "require": {}
+    "require": {},
+    "extra": {
+        "laravel": {
+            "providers": [
+                "ArcherZdip\\GenerateIDNumber\\GenerateChineseIDNumberServiceProvider"
+            ]
+        }
+    }
 }

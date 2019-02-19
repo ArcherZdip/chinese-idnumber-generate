@@ -14,6 +14,7 @@ In your config/app.php add ArcherZdip\GenerateIDNumber\GenerateChineseIDNumberSe
     ArcherZdip\GenerateIDNumber\GenerateChineseIDNumberServiceProvider::class,
 ],
 ```
+If you're using Laravel 5.5, this is all there is to do.
 
 
 ## Methods
