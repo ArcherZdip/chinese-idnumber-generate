@@ -135,3 +135,38 @@ Set sex.
 
 ### **datetime(string $datetime) usage:**
 Set datetime, format xxxx-xx-xx.
+
+## Other Function
+VerityChineseIDNumber can verity chinese id number.  
+**Usage:**
+```php
+use ArcherZdip\GenerateIDNumber\VerityChineseIDNumber;
+
+$bool = VerityChineseIDNumber::isValid(string $idNumber);
+```
+
+**Other methods:**
+```php
+use ArcherZdip\GenerateIDNumber\VerityChineseIDNumber;
+
+// 获取生日
+$birthday = (new VerityChinsesIDNumber(string $idNumber))->getBirthday()->format('Y-m-d');
+
+// 获取年龄
+$age = (new VerityChinsesIDNumber(string $idNumber))->getAge();
+
+// 是否为男性
+$isMale = (new VerityChinsesIDNumber(string $idNumber))->isMale();
+
+// 是否为女性
+$isFemale = (new VerityChinsesIDNumber(string $idNumber))->isFemale();
+
+// 获取年份
+$year = (new VerityChinsesIDNumber(string $idNumber))->getYear()
+
+// 获取月份
+$month = (new VerityChinsesIDNumber(string $idNumber))->getmonth()
+
+// 获取日期
+$day = (new VerityChinsesIDNumber(string $idNumber))->getday()
+```

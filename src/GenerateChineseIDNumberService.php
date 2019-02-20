@@ -64,7 +64,7 @@ class GenerateChineseIDNumberService
 
     /**
      * Generate multi chinese id number
-     * @return array
+     * @return Foo
      * @throws \Exception
      */
     public function get()
@@ -133,7 +133,7 @@ class GenerateChineseIDNumberService
         $suffix_a = mt_rand(0, 9);
         $suffix_b = mt_rand(0, 9);
 
-        $base = $this->cityid . $this->calcDatatime() . $suffix_a . $suffix_b . $this->sex;
+        $base = $this->cityid . $this->getBirthdate() . $suffix_a . $suffix_b . $this->sex;
         $idNumber = $base . $this->calcSuffixD($base);
 
         $chineseIDNumber = new ChineseIDNumber();
@@ -142,7 +142,7 @@ class GenerateChineseIDNumberService
         $chineseIDNumber->city = $this->getCity();
         $chineseIDNumber->region = $this->getRegion();
         $chineseIDNumber->sex = $this->getSex();
-        $chineseIDNumber->birth = $this->getBirthdate();
+        $chineseIDNumber->birth = $this->cityInfo['birthdate'];
 
         return $chineseIDNumber;
     }
@@ -171,7 +171,7 @@ class GenerateChineseIDNumberService
             $datetime = $year . $month . $day;
         }
         $this->cityInfo['birthdate'] = $datetime;
-        return $datetime;
+        return $this;
     }
 
     /**
@@ -466,6 +466,7 @@ class GenerateChineseIDNumberService
      */
     protected function getBirthdate()
     {
+        $this->calcDatatime();
         return $this->cityInfo['birthdate'];
     }
 

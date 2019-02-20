@@ -20,6 +20,8 @@ class Foo
     }
 
     /**
+     * to string
+     *
      * @return array
      */
     public function toString()
@@ -30,6 +32,8 @@ class Foo
     }
 
     /**
+     * object -> array
+     *
      * @return array
      */
     public function toArray()

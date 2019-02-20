@@ -7,7 +7,6 @@
  */
 namespace ArcherZdip\Test\GenerateChineseIDNumber;
 
-use ArcherZdip\GenerateIDNumber\ChineseIDNumber;
 use ArcherZdip\GenerateIDNumber\GenerateChineseIDNumberService;
 use Tests\TestCase;
 
@@ -21,9 +20,7 @@ class GenerateChineseIDNumberServiceTest extends TestCase
     {
         $g = new GenerateChineseIDNumberService();
 
-        $res = $g->on([
-
-        ])->limit(2)->get()->toString();
+        $res = $g->on()->limit(2)->get()->toArray();
 
         dd($res);
     }
