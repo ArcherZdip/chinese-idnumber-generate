@@ -344,7 +344,7 @@ class GenerateChineseIDNumberService
             die('Invalid Length');
         }
         // 权重
-        $factor = array(7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2);
+        $factor = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
         $sums = 0;
         for ($i = 0; $i < 17; $i++) {
             $sums += substr($base, $i, 1) * $factor[$i];

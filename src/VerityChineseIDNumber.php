@@ -7,9 +7,10 @@
  */
 
 namespace ArcherZdip\GenerateIDNumber;
+
+use Exception;
 use DateInterval;
 use DateTimeImmutable;
-use Exception;
 
 class VerityChineseIDNumber
 {

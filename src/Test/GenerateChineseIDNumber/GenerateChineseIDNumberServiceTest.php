@@ -5,10 +5,11 @@
  * Date: 2019-02-16
  * Time: 07:47
  */
+
 namespace ArcherZdip\Test\GenerateChineseIDNumber;
 
-use ArcherZdip\GenerateIDNumber\GenerateChineseIDNumberService;
 use Tests\TestCase;
+use ArcherZdip\GenerateIDNumber\GenerateChineseIDNumberService;
 
 class GenerateChineseIDNumberServiceTest extends TestCase
 {

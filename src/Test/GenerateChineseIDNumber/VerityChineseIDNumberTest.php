@@ -9,8 +9,8 @@
 namespace ArcherZdip\Test\GenerateChineseIDNumber;
 
 
-use ArcherZdip\GenerateIDNumber\VerityChineseIDNumber;
 use Tests\TestCase;
+use ArcherZdip\GenerateIDNumber\VerityChineseIDNumber;
 
 class VerityChineseIDNumberTest extends TestCase
 {
@@ -34,7 +34,7 @@ class VerityChineseIDNumberTest extends TestCase
     {
         $res = (new VerityChineseIDNumber('810000197407066216'))->getBirthday()->format('Y-m-d');
 
-        $this->assertEquals('1974-07-06',$res);
+        $this->assertEquals('1974-07-06', $res);
     }
 
     /**
@@ -45,7 +45,7 @@ class VerityChineseIDNumberTest extends TestCase
     {
         $res = (new VerityChineseIDNumber('810000197407066216'))->getAge();
 
-        $this->assertEquals(44,$res);
+        $this->assertEquals(44, $res);
     }
 
     /**
