@@ -36,7 +36,7 @@ class VerityChineseIDNumber
      *
      * @var array
      */
-    public static $trustedIdNumbers = ['411422199910254823'];
+    public static $trustedIdNumbers = [];
 
     /**
      * VerityChineseIDNumber constructor.
