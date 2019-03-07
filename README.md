@@ -1,4 +1,6 @@
 # Generate Chinese ID Number
+The project has been refactored, and the new address is
+https://github.com/ArcherZdip/laravel-identity
 
 ## Installation
 ### composer
