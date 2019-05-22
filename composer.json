@@ -1,6 +1,7 @@
 {
     "name": "archerzdip/chinese-idnumber-generate",
     "description": "Chinses ID number generate package.",
+    "license": "MIT",
     "authors": [
         {
             "name": "archerzdip",
